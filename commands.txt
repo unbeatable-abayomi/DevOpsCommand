@@ -1,0 +1,1 @@
+whoami  //Checks who is currently on terminal
