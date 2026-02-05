@@ -1,1 +1,4 @@
-increase volume to 30gb
+1) increase volume to 30gb
+2) df -h
+3) lsblk
+
