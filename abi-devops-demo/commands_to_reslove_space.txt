@@ -1,6 +1,6 @@
 1) increase volume to 30gb
 2) df -h
-3) lsblk
+3)  
 4)  sudo apt install cloud-guest-utils
 5) sudo growpart /dev/xvda 1
 6)  sudo resize2fs /dev/xvda1
