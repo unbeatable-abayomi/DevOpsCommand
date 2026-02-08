@@ -4,8 +4,10 @@ provider "aws" {
 
 
 resource "aws_s3_bucket" "example" {
-  bucket = "my-tf-test-bucket"
-
+  bucket = "demo-terraform-eks-state-bucket"
+  lifecycle {
+    prevent_destroy = false
+  }
   tags = {
     Name        = "My bucket"
     Environment = "Dev"
