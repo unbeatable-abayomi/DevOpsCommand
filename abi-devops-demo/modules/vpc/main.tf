@@ -37,6 +37,25 @@ resource "aws_subnet" "public" {
   }
 }
 
+resource "aws_eip" "nat" {
+  count = length(var.public_subnet_cidrs)
+  domain = "vpc"
+
+  tags = {
+    Name = "${var.cluster_name}-nat-${count.index + 1}"
+  }
+}
+
+resource "aws_nat_gateway" "main" {
+  count         = length(var.public_subnet_cidrs)
+  allocation_id = aws_eip.nat[count.index].id
+  subnet_id     = aws_subnet.public[count.index].id
+
+  tags = {
+    Name = "${var.cluster_name}-nat-${count.index + 1}"
+  }
+}
+
 resource "aws_route_table_association" "private" {
   count          = length(var.private_subnet_cidrs)
   subnet_id      = aws_subnet.private[count.index].id
