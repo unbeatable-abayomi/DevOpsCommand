@@ -36,7 +36,13 @@ resource "aws_subnet" "public" {
     "kubernetes.io/role/elb"                       = "1"
   }
 }
+resource "aws_internet_gateway" "main" {
+  vpc_id = aws_vpc.main.id
 
+  tags = {
+    Name = "${var.cluster_name}-igw"
+  }
+}
 resource "aws_eip" "nat" {
   count = length(var.public_subnet_cidrs)
   domain = "vpc"
